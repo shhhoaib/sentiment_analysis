@@ -1,1 +1,190 @@
 # NLP-Sentiment-Analysis
+# 🧠 Sentiment Analysis Platform
+
+> A Python NLP system that classifies text as **positive, negative, or neutral**, detects **8 emotions**, and auto-generates a visual HTML report — powered by a **VADER + TextBlob ensemble**.
+
+---
+
+## 📊 Real Results (from 36 analysed texts)
+
+### Overall Sentiment
+| Sentiment | Count | Percentage |
+|-----------|-------|------------|
+| ✅ Positive | 20 | 55.6% |
+| ❌ Negative | 13 | 36.1% |
+| ➖ Neutral  | 3  | 8.3%  |
+| **Total**  | **36** | **100%** |
+
+### Sentiment by Source
+| Source | Positive | Negative | Neutral |
+|--------|----------|----------|---------|
+| Amazon Reviews | 7 | 5 | 0 |
+| Social Media   | 7 | 4 | 1 |
+| News Articles  | 6 | 4 | 2 |
+
+### Model Confidence
+| Metric | Score |
+|--------|-------|
+| Average confidence | **79.4%** |
+| Highest confidence | **100.0%** |
+| Lowest confidence  | **56.2%** |
+
+### Emotion Detection
+| Emotion | Avg Intensity | Count as Dominant |
+|---------|:-------------:|:-----------------:|
+| 😄 Joy         | 0.1458 | 6 |
+| 😲 Surprise    | 0.1458 | 5 |
+| 😠 Anger       | 0.1389 | 6 |
+| 😨 Fear        | 0.0833 | 3 |
+| 🤝 Trust       | 0.0694 | 2 |
+| 😢 Sadness     | 0.0417 | 1 |
+| 🔮 Anticipation| 0.0278 | 1 |
+| 🤢 Disgust     | 0.0139 | 0 |
+
+### NLP Model Scores
+| Model | Mean Score |
+|-------|-----------|
+| VADER compound | 0.1297 |
+| TextBlob polarity | 0.0563 |
+| TextBlob subjectivity | 0.5250 |
+
+---
+
+## ✨ Features
+
+- 🔍 **Sentiment classification** — positive / negative / neutral using ensemble NLP
+- 🎭 **8-emotion detection** — joy, anger, fear, sadness, surprise, trust, disgust, anticipation
+- 📦 **3 data sources** — Amazon reviews, social media (Twitter/Instagram/Reddit), news articles
+- 📈 **8 auto-generated charts** — radar, heatmap, word cloud, scatter plots, histograms
+- 📄 **Self-contained HTML report** — open in any browser, no server needed
+- 📁 **CSV export** — all scores per record, ready for Excel or Google Sheets
+- 💡 **Business insights** — auto-derived actionable recommendations from patterns
+
+---
+
+## 🗂️ Project Structure
+
+```
+sentiment_analysis/
+├── main.py                       # Entry point — runs full pipeline
+├── data/
+│   └── sample_data.py            # 36 labelled records (Amazon + social + news)
+├── models/
+│   └── sentiment_engine.py       # VADER + TextBlob ensemble + emotion lexicon
+└── utils/
+    ├── visualizer.py             # 8 matplotlib / seaborn / wordcloud charts
+    └── report_generator.py       # Self-contained HTML report builder
+```
+
+---
+
+## ⚙️ Installation
+
+```bash
+pip install vaderSentiment textblob pandas matplotlib seaborn wordcloud scikit-learn
+```
+
+---
+
+## 🚀 Usage
+
+```bash
+python main.py
+```
+
+Terminal output:
+
+```
+────────────────────────────────────────────────
+  Step 1 / 4 — Loading and analysing data
+  ✓ 36 records processed
+  positive    20 | negative    13 | neutral    3
+
+  Step 2 / 4 — Generating charts
+  ✓ 8 charts saved
+
+  Step 3 / 4 — Deriving business insights
+  1. Overall sentiment is strongly positive (56%)...
+
+  Step 4 / 4 — Building HTML report
+  ✓ Report saved → reports/report.html
+
+  Done in 2.0s
+────────────────────────────────────────────────
+```
+
+---
+
+## 📁 Output Files
+
+| File | Description |
+|------|-------------|
+| `reports/report.html` | Full visual report — open in any browser |
+| `reports/results.csv` | All scores per record |
+| `reports/charts/` | 8 individual PNG charts |
+
+---
+
+## ➕ Add Your Own Data
+
+Open `data/sample_data.py` and add entries:
+
+```python
+{"id": "A013", "source": "amazon", "product": "Laptop",
+ "text": "Incredible performance, boots in seconds. Best laptop I've owned!", "rating": 5},
+```
+
+Then run `python main.py` — the report regenerates automatically.
+
+---
+
+## 🛠️ How It Works
+
+### Ensemble Scoring
+```
+Final Score = (VADER × 0.6) + (TextBlob × 0.4)
+
+Score ≥  0.05  →  Positive
+Score ≤ -0.05  →  Negative
+Otherwise      →  Neutral
+```
+
+- **VADER** — handles emoji, slang, ALL CAPS, social media tone
+- **TextBlob** — stronger on formal and news-style writing
+
+### Emotion Detection
+A custom lexicon maps words to 8 emotions. Each text receives a 0–1 score per emotion; the highest becomes the dominant emotion.
+
+---
+
+## 📦 Tech Stack
+
+| Library | Purpose |
+|---------|---------|
+| vaderSentiment | Social media sentiment scoring |
+| TextBlob | Polarity & subjectivity |
+| Pandas | Data processing & CSV export |
+| Matplotlib + Seaborn | Charts & heatmaps |
+| WordCloud | Keyword frequency visualization |
+
+---
+
+## 📌 Key Insights from Sample Data
+
+1. **56% positive overall** — strong signal for marketing campaigns
+2. **Amazon shows 42% negative** — product quality improvements recommended
+3. **Joy and Anger equally dominant** — polarised audience, needs segmentation
+4. **79.4% average model confidence** — texts below 60% flagged for manual review
+5. **52.5% average subjectivity** — balanced mix of opinion and factual content
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and distribute.
+
+---
+
+## 👤 Author
+
+**shhhoaib** · [github.com/shhhoaib](https://github.com/shhhoaib)
